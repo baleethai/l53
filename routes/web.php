@@ -12,5 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('emails.auth.register');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+Route::get('mail', function() {
+
+	\Illuminate\Support\Facades\Mail::to('thinnakor.pattha@itorama.com')->send(new App\Mail\Register());
+
 });
