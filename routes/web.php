@@ -1,5 +1,5 @@
 <?php
-
+Auth::loginUsingId(1);
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('emails.auth.register');
+	foreach (Auth::user()->notifications as $notification) {
+	    $notification->delete();
+	}
+	#Auth::user()->notify(new \App\Notifications\SubscriptionCanceled);
+    #return view('welcome');
 });
 
 Auth::routes();
