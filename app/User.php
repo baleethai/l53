@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function routeNotificationForSlack()
+    {
+        return 'https://hooks.slack.com/services/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';
+    }
 }

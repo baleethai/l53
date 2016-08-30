@@ -1,5 +1,5 @@
 <?php
-Auth::loginUsingId(1);
+;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,10 +12,10 @@ Auth::loginUsingId(1);
 */
 
 Route::get('/', function () {
-	foreach (Auth::user()->notifications as $notification) {
-	    $notification->delete();
-	}
-	#Auth::user()->notify(new \App\Notifications\SubscriptionCanceled);
+	$admin = App\User::find(1);
+	$user = App\User::find(2);
+
+	$admin->notify(new App\Notifications\PaymentReceived($user));
     #return view('welcome');
 });
 
