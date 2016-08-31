@@ -36,8 +36,23 @@ class PaymentReceived extends Notification
 
     public function toSlack($notifiable)
     {
+        $url = url('/');
         return (new \Illuminate\Notifications\Messages\SlackMessage)
-                ->success()
-                ->content('A new payment was just processed!');
+                    ->success()
+                    ->content('One of your invoices has been paid!')
+                    ->attachment(function ($attachment) use ($url) {
+                        $attachment->title('Invoice 1322', $url)
+                                   ->fields([
+                                        'Title'       => 'Server Expenses',
+                                        'Amount'      => '$1,234',
+                                        'Via'         => 'American Express',
+                                        'Was Overdue' => ':-1:',
+                                    ]);
+                    });
+
+        // return (new \Illuminate\Notifications\Messages\SlackMessage)
+        //         ->success()
+        //         ->content('A new payment was just processed!');
+
     }
 }
