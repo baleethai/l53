@@ -12,19 +12,23 @@
 */
 
 Route::get('/', function () {
-	$admin = App\User::find(1);
-	$user = App\User::find(2);
+	// $admin = App\User::find(1);
+	// $user = App\User::find(2);
 
-	$admin->notify(new App\Notifications\PaymentReceived($user));
+	// $admin->notify(new App\Notifications\PaymentReceived($user));
     #return view('welcome');
 });
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+// Route::get('/home', 'HomeController@index');
 
-Route::get('mail', function() {
+Route::get('/mail', function() {
 
-	\Illuminate\Support\Facades\Mail::to('thinnakor.pattha@itorama.com')->send(new App\Mail\Register());
+    Mail::send('emails.test', [], function($message) {
+        $message->to('baleethai@gmail.com');
+        $message->subject('E-Mail Example');
+    });
+    dd('Mail Send Successfully');
 
 });
